@@ -1,141 +1,185 @@
-/**
- * KONFIGURASI DATA PRODUK
- * Anda bisa menambah atau menghapus produk di dalam array ini
- */
-const products = [
-    { 
-        id: 1, 
-        name: "Canva Pro 1 Thn", 
-        price: "Rp 35.000", 
-        desc: "Akses desain tanpa batas dengan fitur premium resmi.", 
-        img: "https://via.placeholder.com/250x150" 
-    },
-    { 
-        id: 2, 
-        name: "Youtube Premium", 
-        price: "Rp 15.000", 
-        desc: "Nonton tanpa iklan dan background play aktif selamanya.", 
-        img: "https://via.placeholder.com/250x150" 
-    },
-    { 
-        id: 3, 
-        name: "Spotify 3 Bulan", 
-        price: "Rp 45.000", 
-        desc: "Dengarkan musik tanpa gangguan iklan kualitas tinggi.", 
-        img: "https://via.placeholder.com/250x150" 
-    },
-    { 
-        id: 4, 
-        name: "Netflix UHD 4K", 
-        price: "Rp 120.000", 
-        desc: "Kualitas gambar terbaik untuk bioskop di rumah Anda.", 
-        img: "https://via.placeholder.com/250x150" 
-    }
-];
-
-/**
- * FUNGSI NAVIGASI HALAMAN (Single Page Application logic)
- */
-function showPage(pageId) {
-    // Sembunyikan semua section dengan menghapus class 'active'
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => {
-        page.classList.remove('active');
-    });
-
-    // Tampilkan page yang dipilih
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-    }
-
-    // Scroll ke atas otomatis saat pindah halaman
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #0ea5e9;
+    --bg: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --white: #ffffff;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/**
- * FUNGSI RENDER PRODUK
- * Menampilkan data dari array 'products' ke dalam HTML
- */
-function renderProducts() {
-    const productContainer = document.getElementById('product-list');
-    
-    // Jika kontainer tidak ditemukan, hentikan fungsi
-    if (!productContainer) return;
-
-    // Bersihkan kontainer sebelum diisi
-    productContainer.innerHTML = '';
-
-    // Loop data produk
-    products.forEach(product => {
-        const productCard = `
-            <div class="card">
-                <img src="${product.img}" alt="${product.name}">
-                <div class="card-body">
-                    <h3>${product.name}</h3>
-                    <p class="price">${product.price}</p>
-                    <p class="desc">${product.desc}</p>
-                    <button class="btn-buy" onclick="handleBuy('${product.name}')">Beli Sekarang</button>
-                </div>
-            </div>
-        `;
-        productContainer.innerHTML += productCard;
-    });
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/**
- * LOGIKA AUTENTIKASI (Login & Logout)
- */
-function handleLogin(event) {
-    event.preventDefault(); // Mencegah refresh halaman
-    
-    const emailInput = document.getElementById('email-input');
-    const userEmail = emailInput.value;
-
-    if (userEmail) {
-        // Sembunyikan tombol login, tampilkan info user
-        document.getElementById('login-btn').classList.add('hidden');
-        document.getElementById('user-info').classList.remove('hidden');
-        document.getElementById('user-email').innerText = userEmail;
-
-        alert(`Selamat datang di IlyaAllShope, ${userEmail}!`);
-        showPage('home'); // Arahkan ke home setelah login
-        emailInput.value = ''; // Reset input
-    }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
 }
 
-function logout() {
-    const yakin = confirm("Apakah Anda yakin ingin keluar?");
-    if (yakin) {
-        // Tampilkan kembali tombol login, sembunyikan info user
-        document.getElementById('login-btn').classList.remove('hidden');
-        document.getElementById('user-info').classList.add('hidden');
-        document.getElementById('user-email').innerText = '';
-
-        alert("Anda telah berhasil logout.");
-        showPage('home');
-    }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
-/**
- * FUNGSI PEMBELIAN
- */
-function handleBuy(productName) {
-    const isLoggedIn = !document.getElementById('user-info').classList.contains('hidden');
-
-    if (isLoggedIn) {
-        alert(`Pesanan untuk ${productName} telah diterima. Admin akan menghubungi Anda via email.`);
-    } else {
-        alert("Mohon maaf, Anda harus Login terlebih dahulu untuk melakukan pembelian.");
-        showPage('login');
-    }
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e2e8f0;
 }
 
-/**
- * INISIALISASI
- * Fungsi yang dijalankan saat browser selesai memuat halaman
- */
-document.addEventListener('DOMContentLoaded', () => {
-    renderProducts();
-    console.log("IlyaAllShope Script Loaded Successfully!");
-});
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.logo span {
+    color: var(--text-dark);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-login {
+    background: #f1f5f9;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Hero */
+.hero-content {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+    border: 1px solid #f1f5f9;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 1.2rem;
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+/* Pages Control */
+.page {
+    display: none;
+    min-height: 80vh;
+}
+
+.page.active {
+    display: block;
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none; }
+
+.footer {
+    padding: 3rem 0;
+    background: #f1f5f9;
+    text-align: center;
+    margin-top: 5rem;
+}
