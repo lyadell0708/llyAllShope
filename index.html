@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IlyaAllShope | Toko Digital</title>
+    <title>IlyaAllShope | Premium Digital Store</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Import Font & Icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <!-- NAVIGASI -->
     <nav class="navbar">
         <div class="container nav-wrapper">
-            <div class="logo">IlyaAllShope</div>
+            <div class="logo">Ilya<span>AllShope</span></div>
             <ul class="nav-links">
                 <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('product')">Products</a></li>
                 <li><a href="#" onclick="showPage('about')">About</a></li>
-                <li><a href="#" onclick="showPage('product')">Product</a></li>
                 <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
             <div id="auth-section">
-                <button id="login-btn" class="btn-primary" onclick="showPage('login')">Login</button>
-                <div id="user-info" class="hidden">
+                <button id="login-btn" class="btn-login" onclick="showPage('login')">Login</button>
+                <div id="user-info" class="user-badge hidden">
                     <span id="user-email"></span>
                     <button class="btn-logout" onclick="logout()">Logout</button>
                 </div>
@@ -28,115 +30,76 @@
         </div>
     </nav>
 
-    <!-- HALAMAN HOME -->
+    <!-- HERO SECTION -->
     <section id="home" class="page active">
-        <div class="hero container">
-            <h1>Selamat Datang di IlyaAllShope</h1>
-            <p>Temukan berbagai produk digital premium dengan harga terbaik.</p>
-            <button class="btn-cta" onclick="showPage('product')">Belanja Sekarang</button>
+        <div class="hero-content container">
+            <div class="hero-text">
+                <h1>Upgrade Hidup Digitalmu Bersama <span class="highlight">IlyaAllShope</span></h1>
+                <p>Platform terpercaya penyedia produk digital premium. Instan, Legal, dan Bergaransi.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="showPage('product')">Mulai Belanja</button>
+                    <button class="btn-secondary" onclick="showPage('about')">Pelajari Lebih Lanjut</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- HALAMAN ABOUT -->
-    <section id="about" class="page">
-        <div class="container">
-            <h2>Tentang Kami</h2>
-            <p>IlyaAllShope adalah platform terpercaya yang menyediakan lisensi software, akun premium, dan jasa digital lainnya untuk mendukung produktivitas Anda.</p>
-        </div>
-    </section>
-
-    <!-- HALAMAN PRODUCT -->
+    <!-- PRODUCT SECTION -->
     <section id="product" class="page">
         <div class="container">
-            <h2 class="section-title">Katalog Produk</h2>
+            <div class="section-header">
+                <h2>Katalog Produk</h2>
+                <p>Pilih produk digital yang Anda butuhkan</p>
+            </div>
             <div id="product-list" class="product-grid">
-                <!-- Produk akan dimuat melalui JavaScript -->
+                <!-- Rendered by JS -->
             </div>
         </div>
     </section>
 
-    <!-- HALAMAN CONTACT -->
-    <section id="contact" class="page">
-        <div class="container">
-            <div class="form-card">
-                <h2>Hubungi Kami</h2>
-                <form onsubmit="event.preventDefault(); alert('Pesan terkirim!');">
-                    <input type="text" placeholder="Nama Lengkap" required>
-                    <input type="email" placeholder="Email Anda" required>
-                    <textarea placeholder="Pesan Anda" rows="5" required></textarea>
-                    <button type="submit" class="btn-primary">Kirim Pesan</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- HALAMAN LOGIN -->
+    <!-- LOGIN SECTION -->
     <section id="login" class="page">
         <div class="container">
-            <div class="form-card login-card">
-                <h2>Login Member</h2>
+            <div class="auth-card">
+                <h2>Selamat Datang Kembali</h2>
+                <p>Masuk ke akun Anda untuk akses pembelian</p>
                 <form onsubmit="handleLogin(event)">
-                    <input type="email" id="email-input" placeholder="Masukkan Email" required>
-                    <input type="password" placeholder="Masukkan Password" required>
-                    <button type="submit" class="btn-primary">Masuk</button>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="email-input" placeholder="contoh@email.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Masuk Sekarang</button>
                 </form>
             </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & CONTACT (Simplified) -->
+    <section id="about" class="page">
+        <div class="container text-center">
+            <h2>Tentang IlyaAllShope</h2>
+            <p>Kami hadir untuk memudahkan Anda mendapatkan akses ke berbagai layanan digital premium dunia dengan harga yang bersahabat bagi kantong orang Indonesia.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="page">
+        <div class="container text-center">
+            <h2>Hubungi Kami</h2>
+            <p>Ada kendala atau pertanyaan? CS kami siap membantu.</p>
+            <a href="https://wa.me/6285714809634" target="_blank" class="btn-whatsapp">Chat WhatsApp Admin</a>
         </div>
     </section>
 
     <footer class="footer">
-        <p>&copy; 2026 IlyaAllShope. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 <strong>IlyaAllShope</strong>. Made with ❤️ for Digital Excellence.</p>
+        </div>
     </footer>
 
-    <script>
-        // Data Produk
-        const products = [
-            { name: "Canva Pro 1 Thn", price: "Rp 35.000", desc: "Akses desain tanpa batas dengan fitur premium.", img: "https://via.placeholder.com/250x150" },
-            { name: "Youtube Premium", price: "Rp 15.000", desc: "Nonton tanpa iklan, background play aktif.", img: "https://via.placeholder.com/250x150" },
-            { name: "Spotify 3 Bulan", price: "Rp 45.000", desc: "Musik tanpa iklan dengan kualitas suara tinggi.", img: "https://via.placeholder.com/250x150" }
-        ];
-
-        // Navigasi
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // Render Produk
-        function renderProducts() {
-            const container = document.getElementById('product-list');
-            container.innerHTML = products.map(p => `
-                <div class="card">
-                    <img src="${p.img}" alt="${p.name}">
-                    <div class="card-body">
-                        <h3>${p.name}</h3>
-                        <p class="price">${p.price}</p>
-                        <p class="desc">${p.desc}</p>
-                        <button class="btn-buy" onclick="alert('Silakan hubungi admin untuk membeli!')">Beli</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Login
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('email-input').value;
-            document.getElementById('login-btn').classList.add('hidden');
-            document.getElementById('user-info').classList.remove('hidden');
-            document.getElementById('user-email').innerText = email;
-            showPage('home');
-        }
-
-        // Logout
-        function logout() {
-            document.getElementById('login-btn').classList.remove('hidden');
-            document.getElementById('user-info').classList.add('hidden');
-            alert('Berhasil Logout');
-        }
-
-        window.onload = renderProducts;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
