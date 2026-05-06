@@ -3,196 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IlyaAllShope | Digital Solution</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Transisi halus antar halaman */
-        section {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        section.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>IlyaAllShope | Toko Digital</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
 
-    <!-- NAVBAR -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-600 tracking-tight">
-                IlyaAllShope
-            </div>
-            
-            <ul class="hidden md:flex space-x-6 font-medium">
-                <li><a href="javascript:void(0)" onclick="nav('home')" class="hover:text-blue-600 transition">Home</a></li>
-                <li><a href="javascript:void(0)" onclick="nav('about')" class="hover:text-blue-600 transition">About</a></li>
-                <li><a href="javascript:void(0)" onclick="nav('product')" class="hover:text-blue-600 transition">Product</a></li>
-                <li><a href="javascript:void(0)" onclick="nav('contact')" class="hover:text-blue-600 transition">Contact</a></li>
+    <!-- NAVIGASI -->
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">IlyaAllShope</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('product')">Product</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
-
-            <div id="auth-area">
-                <button id="btn-login-nav" onclick="nav('login')" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">Login</button>
-                <div id="user-profile" class="hidden flex items-center space-x-3">
-                    <span id="user-email-display" class="text-sm font-semibold text-gray-600"></span>
-                    <button onclick="logout()" class="text-red-500 hover:underline text-sm">Logout</button>
+            <div id="auth-section">
+                <button id="login-btn" class="btn-primary" onclick="showPage('login')">Login</button>
+                <div id="user-info" class="hidden">
+                    <span id="user-email"></span>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HOME SECTION -->
-    <section id="home" class="active container mx-auto px-6 py-20 text-center">
-        <h1 class="text-5xl font-extrabold mb-4">Solusi Digital <span class="text-blue-600">Terbaik</span></h1>
-        <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">Kami menyediakan berbagai kebutuhan digital mulai dari kursus, lisensi software, hingga jasa desain dengan harga terjangkau.</p>
-        <button onclick="nav('product')" class="bg-blue-600 text-white px-10 py-4 rounded-lg shadow-lg hover:bg-blue-700 transition">Mulai Belanja</button>
+    <!-- HALAMAN HOME -->
+    <section id="home" class="page active">
+        <div class="hero container">
+            <h1>Selamat Datang di IlyaAllShope</h1>
+            <p>Temukan berbagai produk digital premium dengan harga terbaik.</p>
+            <button class="btn-cta" onclick="showPage('product')">Belanja Sekarang</button>
+        </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="container mx-auto px-6 py-20">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600" class="rounded-2xl shadow-xl" alt="Tim Kami">
+    <!-- HALAMAN ABOUT -->
+    <section id="about" class="page">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+            <p>IlyaAllShope adalah platform terpercaya yang menyediakan lisensi software, akun premium, dan jasa digital lainnya untuk mendukung produktivitas Anda.</p>
+        </div>
+    </section>
+
+    <!-- HALAMAN PRODUCT -->
+    <section id="product" class="page">
+        <div class="container">
+            <h2 class="section-title">Katalog Produk</h2>
+            <div id="product-list" class="product-grid">
+                <!-- Produk akan dimuat melalui JavaScript -->
             </div>
-            <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold mb-4">Mengenal IlyaAllShope</h2>
-                <p class="text-gray-600 mb-4 leading-relaxed">Berdiri sejak tahun 2023, IlyaAllShope berfokus pada penyediaan produk digital berkualitas yang membantu para profesional dan pelajar dalam meningkatkan produktivitas mereka.</p>
-                <ul class="space-y-2 text-blue-600 font-medium">
-                    <li>✓ Layanan Cepat & Instan</li>
-                    <li>✓ Support Pelanggan 24/7</li>
-                    <li>✓ Garansi Produk Asli</li>
-                </ul>
+        </div>
+    </section>
+
+    <!-- HALAMAN CONTACT -->
+    <section id="contact" class="page">
+        <div class="container">
+            <div class="form-card">
+                <h2>Hubungi Kami</h2>
+                <form onsubmit="event.preventDefault(); alert('Pesan terkirim!');">
+                    <input type="text" placeholder="Nama Lengkap" required>
+                    <input type="email" placeholder="Email Anda" required>
+                    <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Kirim Pesan</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCT SECTION -->
-    <section id="product" class="container mx-auto px-6 py-20">
-        <h2 class="text-3xl font-bold text-center mb-12">Katalog Produk</h2>
-        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Render via JS -->
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="container mx-auto px-6 py-20">
-        <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
-            <h2 class="text-2xl font-bold mb-6">Kirim Pesan</h2>
-            <form onsubmit="event.preventDefault(); alert('Pesan Anda telah terkirim!');">
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2">Nama Lengkap</label>
-                    <input type="text" class="w-full px-4 py-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2">Email</label>
-                    <input type="email" class="w-full px-4 py-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-bold mb-2">Pesan</label>
-                    <textarea class="w-full px-4 py-3 bg-gray-50 border rounded-lg h-32 focus:ring-2 focus:ring-blue-500 outline-none transition" required></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Kirim Sekarang</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- LOGIN SECTION -->
-    <section id="login" class="container mx-auto px-6 py-20">
-        <div class="max-w-md mx-auto bg-white p-10 rounded-2xl shadow-2xl border border-gray-100">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-800">Login Akun</h2>
-                <p class="text-gray-500">Gunakan email Anda untuk masuk</p>
+    <!-- HALAMAN LOGIN -->
+    <section id="login" class="page">
+        <div class="container">
+            <div class="form-card login-card">
+                <h2>Login Member</h2>
+                <form onsubmit="handleLogin(event)">
+                    <input type="email" id="email-input" placeholder="Masukkan Email" required>
+                    <input type="password" placeholder="Masukkan Password" required>
+                    <button type="submit" class="btn-primary">Masuk</button>
+                </form>
             </div>
-            <form onsubmit="handleLogin(event)">
-                <div class="mb-5">
-                    <label class="block text-sm font-semibold mb-2">Alamat Email</label>
-                    <input type="email" id="login-email" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-600 outline-none" placeholder="anda@email.com" required>
-                </div>
-                <div class="mb-8">
-                    <label class="block text-sm font-semibold mb-2">Password</label>
-                    <input type="password" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-600 outline-none" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 shadow-lg transition">Login Sekarang</button>
-            </form>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t py-12 mt-20">
-        <div class="container mx-auto px-6 text-center">
-            <p class="font-bold text-blue-600 mb-2">IlyaAllShope</p>
-            <p class="text-gray-500 text-sm">© 2024 IlyaAllShope Digital Hub. Hak Cipta Dilindungi.</p>
-        </div>
+    <footer class="footer">
+        <p>&copy; 2026 IlyaAllShope. All rights reserved.</p>
     </footer>
 
     <script>
-        // Data Produk Digital
+        // Data Produk
         const products = [
-            { id: 1, name: "Premium Canva Pro", price: "Rp 25.000", desc: "Akses fitur desain tanpa batas selama 1 tahun.", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=400" },
-            { id: 2, name: "E-Course SEO 2024", price: "Rp 150.000", desc: "Kuasai halaman pertama Google dengan teknik terbaru.", img: "https://images.unsplash.com/photo-1562577353-f5a742a2c38d?auto=format&fit=crop&w=400" },
-            { id: 3, name: "Software POS Kasir", price: "Rp 500.000", desc: "Aplikasi kasir ringan untuk UMKM dan toko kelontong.", img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400" },
-            { id: 4, name: "Database 1000+ Font", price: "Rp 45.000", desc: "Koleksi font premium untuk project desain grafis.", img: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=400" }
+            { name: "Canva Pro 1 Thn", price: "Rp 35.000", desc: "Akses desain tanpa batas dengan fitur premium.", img: "https://via.placeholder.com/250x150" },
+            { name: "Youtube Premium", price: "Rp 15.000", desc: "Nonton tanpa iklan, background play aktif.", img: "https://via.placeholder.com/250x150" },
+            { name: "Spotify 3 Bulan", price: "Rp 45.000", desc: "Musik tanpa iklan dengan kualitas suara tinggi.", img: "https://via.placeholder.com/250x150" }
         ];
 
-        // Navigasi Antar Halaman
-        function nav(sectionId) {
-            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
+        // Navigasi
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // Render Produk ke Layar
+        // Render Produk
         function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = products.map(item => `
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 group border border-gray-100">
-                    <div class="overflow-hidden">
-                        <img src="${item.img}" alt="${item.name}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">${item.name}</h3>
-                        <p class="text-blue-600 font-extrabold text-lg mb-3">${item.price}</p>
-                        <p class="text-gray-500 text-sm mb-6">${item.desc}</p>
-                        <button onclick="buy()" class="w-full bg-gray-50 text-blue-600 border border-blue-600 font-bold py-2 rounded-lg hover:bg-blue-600 hover:text-white transition">Beli Sekarang</button>
+            const container = document.getElementById('product-list');
+            container.innerHTML = products.map(p => `
+                <div class="card">
+                    <img src="${p.img}" alt="${p.name}">
+                    <div class="card-body">
+                        <h3>${p.name}</h3>
+                        <p class="price">${p.price}</p>
+                        <p class="desc">${p.desc}</p>
+                        <button class="btn-buy" onclick="alert('Silakan hubungi admin untuk membeli!')">Beli</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Logika Login
+        // Login
         function handleLogin(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            
-            // Simulasikan Login
-            document.getElementById('btn-login-nav').classList.add('hidden');
-            document.getElementById('user-profile').classList.remove('hidden');
-            document.getElementById('user-email-display').innerText = email;
-            
-            alert('Login berhasil! Selamat datang di IlyaAllShope.');
-            nav('home');
+            const email = document.getElementById('email-input').value;
+            document.getElementById('login-btn').classList.add('hidden');
+            document.getElementById('user-info').classList.remove('hidden');
+            document.getElementById('user-email').innerText = email;
+            showPage('home');
         }
 
-        // Logika Logout
+        // Logout
         function logout() {
-            if(confirm('Apakah Anda ingin keluar?')) {
-                document.getElementById('btn-login-nav').classList.remove('hidden');
-                document.getElementById('user-profile').classList.add('hidden');
-                nav('home');
-            }
+            document.getElementById('login-btn').classList.remove('hidden');
+            document.getElementById('user-info').classList.add('hidden');
+            alert('Berhasil Logout');
         }
 
-        function buy() {
-            alert('Silakan login terlebih dahulu untuk melakukan pembelian.');
-        }
-
-        // Jalankan saat pertama kali dibuka
         window.onload = renderProducts;
     </script>
 </body>
